@@ -497,6 +497,38 @@ section {
   animation: scroll-down 2s infinite;
 }
 
+.gallery-instruction {
+  text-align: center;
+  margin-bottom: 40px;
+  opacity: 0.7;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.scroll-icon {
+  width: 30px;
+  height: 50px;
+  border: 2px solid var(--color-light);
+  border-radius: 15px;
+  position: relative;
+}
+
+.scroll-icon::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-light);
+  border-radius: 50%;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll-down 2s infinite;
+}
+
 @keyframes scroll-down {
   0% {
     opacity: 1;
@@ -508,34 +540,51 @@ section {
   }
 }
 
+/* 🆕 Horizontal scroll layout */
 .circular-gallery-container {
-  position: relative;
-  height: 600px;
-  width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+  scroll-behavior: smooth; /* ← This enables smooth scrolling */
 }
 
 .circular-gallery {
   display: flex;
-  position: absolute;
-  height: 100%;
-  transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  gap: 40px;
 }
 
+/* 🆕 Project item styling */
 .project-item {
-  min-width: 350px;
+  flex: 0 0 auto;
+  width: 350px;
   height: 500px;
-  margin: 0 20px;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  transform: scale(0.9);
-  transition: transform 0.5s ease;
+  scroll-snap-align: center;
+  animation: slideIn 1s ease forwards;
+  opacity: 0;
+  transform: translateX(50px);
 }
 
-.project-item.active {
-  transform: scale(1);
+/* 🆕 Slide-in animation */
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
+
+/* 🆕 Stagger animation delays */
+.project-item:nth-child(1) { animation-delay: 0.1s; }
+.project-item:nth-child(2) { animation-delay: 0.2s; }
+.project-item:nth-child(3) { animation-delay: 0.3s; }
+.project-item:nth-child(4) { animation-delay: 0.4s; }
+.project-item:nth-child(5) { animation-delay: 0.5s; }
+/* Continue as needed */
 
 .project-image {
   width: 100%;
@@ -574,6 +623,10 @@ section {
 .project-info p {
   font-size: 0.9rem;
   opacity: 0.8;
+}
+.circular-gallery-container {
+  /* ...existing styles */
+  scroll-behavior: smooth;
 }
 
 /* === SERVICES SECTION === */

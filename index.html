@@ -104,6 +104,10 @@
       <span>Scroll to explore</span>
       <div class="scroll-icon"></div>
     </div>
+      <!-- 🔘 Navigation Buttons -->
+  <button class="project-nav-btn prev-project">&#10094;</button>
+  <button class="project-nav-btn next-project">&#10095;</button>
+    <div class="circular-gallery">
     <div class="circular-gallery">
 
       <a href="https://drive.google.com/file/d/1TRxmyCmYgoMKh7OJO5pffKL5rv8IDHF5/view?usp=drive_link" target="_blank" class="project-item">
@@ -400,6 +404,42 @@
       observer.observe(logo);
     }
   });
+</script>
+<script>
+  const gallery = document.querySelector('.circular-gallery-container');
+  const scrollAmount = 400; // Adjust if needed
+
+  document.querySelector('.prev-project').addEventListener('click', () => {
+    gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  });
+
+  document.querySelector('.next-project').addEventListener('click', () => {
+    gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  });
+</script>
+<script>
+  const gallery = document.querySelector('.circular-gallery-container');
+  const scrollAmount = 400; // how much to scroll per slide
+  let autoScrollInterval;
+
+  function autoScrollGallery() {
+    if (!gallery) return;
+    autoScrollInterval = setInterval(() => {
+      // If we're at the end, scroll back to start
+      if (gallery.scrollLeft + gallery.offsetWidth >= gallery.scrollWidth - 10) {
+        gallery.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }, 3000); // every 3 seconds
+  }
+
+  // Optional: Pause on hover
+  gallery.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+  gallery.addEventListener('mouseleave', autoScrollGallery);
+
+  // Start auto scroll
+  autoScrollGallery();
 </script>
 
 

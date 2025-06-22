@@ -407,6 +407,27 @@ section {
     transform: translateY(-50%) rotate(360deg);
   }
 }
+/* Default (Mobile First) */
+.project-item {
+  flex: 0 0 90%;
+  max-width: 90%;
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  .project-item {
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+}
+
+/* Laptops and larger */
+@media (min-width: 1024px) {
+  .project-item {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+}
 
 /* === ABOUT SECTION === */
 .about {

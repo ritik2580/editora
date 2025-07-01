@@ -93,23 +93,24 @@
     </div>
   </section>
 
-<!-- Projects Section with Circular Gallery -->
 <section id="projects" class="projects">
   <div class="section-heading">
     <h2>Featured Projects</h2>
     <div class="heading-line"></div>
   </div>
-  <div class="circular-gallery-container">
+
+  <div class="circular-gallery-container" id="galleryContainer">
     <div class="gallery-instruction">
       <span>Scroll to explore</span>
       <div class="scroll-icon"></div>
     </div>
-      <!-- 🔘 Navigation Buttons -->
-  <button class="project-nav-btn prev-project">&#10094;</button>
-  <button class="project-nav-btn next-project">&#10095;</button>
-    <div class="circular-gallery">
-    <div class="circular-gallery">
 
+    <!-- Navigation Buttons -->
+    <button class="project-nav-btn prev-project" onclick="scrollGallery(-1)">&#10094;</button>
+    <button class="project-nav-btn next-project" onclick="scrollGallery(1)">&#10095;</button>
+
+    <div class="circular-gallery" id="gallery">
+      <!-- Project Items -->
       <a href="https://drive.google.com/file/d/1TRxmyCmYgoMKh7OJO5pffKL5rv8IDHF5/view?usp=drive_link" target="_blank" class="project-item">
         <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=60')"></div>
         <div class="project-info">
@@ -122,7 +123,7 @@
         <div class="project-image" style="background-image: url('https://vip-go.premiumbeat.com/wp-content/uploads/2018/04/editing-cover.jpg?resize=875,490')"></div>
         <div class="project-info">
           <h3>Reality Of Crypto Currency</h3>
-          <p>Vetical Short EDITING</p>
+          <p>Vertical Short EDITING</p>
         </div>
       </a>
 
@@ -141,10 +142,17 @@
           <p>Documentary Style</p>
         </div>
       </a>
-
     </div>
   </div>
 </section>
+<script>
+  function scrollGallery(direction) {
+    const gallery = document.getElementById('gallery');
+    const itemWidth = gallery.querySelector('.project-item').offsetWidth + 24; // include gap
+    gallery.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+  }
+</script>
+
 <!-- Founder & Co-Founder Section -->
 <section id="founders" class="founders-section">
   <div class="section-heading">

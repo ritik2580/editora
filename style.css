@@ -473,7 +473,16 @@ section {
   transition: width 1.5s ease-in-out;
 }
 
-/* === PROJECTS SECTION (UPDATED) === */
+:root {
+  --background: #0a0a0a;
+  --card-bg: #121212;
+  --text: #ffffff;
+  --text-light: #aaaaaa;
+  --border: rgba(255, 255, 255, 0.1);
+  --shadow: rgba(0, 0, 0, 0.3);
+  --nav-hover: #1f1f1f;
+}
+
 .projects {
   padding: 4rem 0;
   background-color: var(--background);
@@ -481,18 +490,113 @@ section {
   overflow: hidden;
 }
 
-.projects::before {
-  content: '';
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  top: -50%;
-  left: -50%;
-  transform: rotate(30deg);
-  pointer-events: none;
+.section-heading {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-/* Navigation Arrows */
+.section-heading h2 {
+  font-size: 2.5rem;
+  color: var(--text);
+  font-family: 'Syncopate', sans-serif;
+  letter-spacing: 2px;
+}
+
+.heading-line {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #ff00c8, #00e5ff);
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+
+/* Circular Gallery Container */
+.circular-gallery-container {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  padding: 2rem 1rem;
+  display: flex;
+  gap: 1rem;
+  scrollbar-width: none;
+}
+
+.circular-gallery-container::-webkit-scrollbar {
+  display: none;
+}
+
+.circular-gallery {
+  display: flex;
+  gap: 1.5rem;
+  scroll-snap-align: center;
+}
+
+/* Project Card */
+.project-item {
+  flex: 0 0 80%;
+  max-width: 80%;
+  scroll-snap-align: center;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 14px rgba(0, 229, 255, 0.2);
+}
+
+@media (min-width: 768px) {
+  .project-item {
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-item {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+}
+
+/* Project Image */
+.project-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+}
+
+.project-item:hover .project-image {
+  transform: scale(1.05);
+}
+
+/* Project Info */
+.project-info {
+  padding: 1rem;
+}
+
+.project-info h3 {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.project-info p {
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+/* Navigation Buttons */
 .project-nav-btn {
   position: absolute;
   top: 50%;
@@ -525,153 +629,55 @@ section {
   right: 1rem;
 }
 
-/* Scroll Container */
-.circular-gallery-container {
+/* Scroll Hint */
+.gallery-instruction {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-light);
+  font-size: 0.875rem;
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  gap: 1.5rem;
-  padding: 1rem 2rem;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.6;
+}
+
+.scroll-icon {
+  width: 16px;
+  height: 24px;
+  border: 2px solid var(--text-light);
+  border-radius: 12px;
+  margin-top: 0.4rem;
   position: relative;
 }
 
-.circular-gallery-container::-webkit-scrollbar {
-  display: none;
+.scroll-icon::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: var(--text-light);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: scroll-dot 1.5s infinite;
 }
 
-.circular-gallery {
-  display: flex;
-  gap: 1.5rem;
-}
-.track-record-section {
-  padding: 60px 20px;
-  background: var(--color-dark-gray);
-  text-align: center;
-}
-
-.track-title {
-  font-size: 2.8rem;
-  margin-bottom: 40px;
-  color: white); /* Magenta */
-  font-family: var(--font-secondary);
-  letter-spacing: 2px;
-}
-
-.track-record-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 30px;
-  max-width: 1000px;
-  margin: auto;
-}
-
-.track-card {
-  background: var(--color-dark);
-  border: 2px solid var(--color-accent-alt); /* Aqua border */
-  border-radius: 15px;
-  padding: 30px 20px;
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3); /* Aqua glow */
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.track-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px var(--color-accent-alt);
-}
-
-.track-card h3 {
-  font-size: 2.5rem;
-  color: magenta; /* Neon green for numbers */
-  margin-bottom: 10px;
-  font-family: var(--font-secondary);
-}
-
-.track-card p {
-  color: var(--color-light-gray);
-  font-size: 1rem;
-  font-family: var(--font-primary);
-  margin: 0;
-}
-
-/* Project Card */
-.project-item {
-  flex: 0 0 80%;
-  max-width: 80%;
-  scroll-snap-align: center;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  background-color: var(--card-bg);
-  box-shadow: 0 4px 6px var(--shadow);
-  border: 1px solid var(--border);
-  transform: translateX(50px);
-  opacity: 0;
-  animation: slideIn 1s ease forwards;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px var(--shadow);
-}
-
-/* Adjust sizes for screens */
-@media (min-width: 768px) {
-  .project-item {
-    flex: 0 0 45%;
-    max-width: 45%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .project-item {
-    flex: 0 0 30%;
-    max-width: 30%;
-  }
-}
-
-/* Animation */
-@keyframes slideIn {
-  to {
+@keyframes scroll-dot {
+  0% {
+    top: 4px;
     opacity: 1;
-    transform: translateX(0);
   }
-}
-
-/* Images */
-.project-image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background-size: cover;
-  background-position: center;
-  border-bottom: 1px solid var(--border);
-  transition: transform 0.5s ease;
-}
-
-.project-item:hover .project-image {
-  transform: scale(1.05);
-}
-
-/* Info */
-.project-info {
-  padding: 1rem;
-  background: var(--card-bg);
-}
-
-.project-info h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 0.5rem;
-}
-
-.project-info p {
-  font-size: 0.875rem;
-  color: var(--text-light);
-  line-height: 1.5;
+  50% {
+    top: 12px;
+    opacity: 0.5;
+  }
+  100% {
+    top: 4px;
+    opacity: 1;
+  }
 }
 
 
